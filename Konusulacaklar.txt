@@ -1,0 +1,4 @@
+primary key ( int - guid )
+char, varchar, nvarchar, ntext -> metinsel tip ( string veri tipi )
+bit -> true or false
+
