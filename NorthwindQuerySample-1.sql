@@ -91,3 +91,36 @@ from Products as p
 where p.UnitPrice > 50 and p.UnitPrice < 100
 order by p.UnitPrice
 
+
+--1997 yilinda verilen siparisler
+select * from Orders as o
+where YEAR(o.OrderDate) = 1997
+
+--1997 yilinin MAYIS ayinda verilen siparisler
+select * from Orders as o
+where YEAR(o.OrderDate) = 1997 and MONTH(o.OrderDate) = 5
+
+--YEAR fonksiyonu disaridan bir date alip disariya bir INT doner
+
+--Geciken siparislerimi ekrana yazdir
+select * from Orders as o
+where o.ShippedDate > o.RequiredDate 
+
+
+
+--en pahali ilk 5 URUNU getir
+select 
+top 5 *
+from Products as p
+order by p.UnitPrice desc
+
+-- 5-10 arasindaki urunleri getir
+select * from Products as p
+order by p.ProductName
+OFFSET 10 ROWS
+
+
+
+select * from Products as p
+order by p.UnitPrice desc
+OFFSET 5 ROWS
