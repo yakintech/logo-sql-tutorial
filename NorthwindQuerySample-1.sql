@@ -124,3 +124,38 @@ OFFSET 10 ROWS
 select * from Products as p
 order by p.UnitPrice desc
 OFFSET 5 ROWS
+
+--COUNT toplam kac adet oldugunu gosteriyor
+select 
+COUNT(*) 
+from Products
+
+--UnitsInStock NULL olmayan urun adedi
+select 
+COUNT(p.UnitsInStock)
+from Products as p
+
+--SUM toplami belirtir
+select
+SUM(p.UnitPrice) 
+from Products as p
+
+--AVG ortalama belirtir
+select
+AVG(p.UnitPrice) 
+from Products as p
+
+--Stock NULL OLMAYAN URUNLERI BANA VER
+select * from Products as p
+where
+p.UnitsInStock is  NULL
+
+--MIN Mevcut kolondaki en dusuk DEGERI getirir
+select
+MIN(p.UnitPrice) from Products as p
+
+--MAX Mevcut kolondaki en YUKSEK DEGERI getirir
+select
+MAX(p.UnitPrice) from Products as p
+
+
