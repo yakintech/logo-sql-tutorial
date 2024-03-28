@@ -1,4 +1,4 @@
--- Northwind tarafinda category table bir insert islemi yapmak istiyorum
+﻿-- Northwind tarafinda category table bir insert islemi yapmak istiyorum
 insert into Categories(CategoryName, Description)
 values('Camp','Camp products...')
 
@@ -31,6 +31,22 @@ select IDENT_CURRENT('Categories')
 select IDENT_CURRENT('Products')
 select GETUTCDATE()
 SELECT DATEDIFF(day, '2036-03-01', '2036-02-28');
+
+-- 2) Ülkesi UK olan müşterilerimin ülkelerini Germany, şehirlerini Berlin olarak güncelleyiniz.
+update Customers set Country = 'Germany', City = 'Berlin'
+where Country = 'UK'
+
+-- 3) 100$ dan büyük ürünlerin fiyatın %10 indirimli olarak güncelleyin
+update Products set UnitPrice = UnitPrice * 0.9
+where UnitPrice > 400
+
+
+-- 4) Müşterilerin adreslerinin sonuna sehir ve ülke adını ekleyiniz.
+update Customers set Address = Address + ' ' + City +' ' + Country
+
+
+
+
 
 
 
