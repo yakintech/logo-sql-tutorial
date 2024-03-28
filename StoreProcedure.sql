@@ -164,7 +164,8 @@ select * from Customers
 exec sp_add_order_and_stock_update 'ALFKI', '3/28/2024' , 1,10
 
 
-
+exec sp_help 'products'
+exec sp_spaceused 'orders'
 
 
 
