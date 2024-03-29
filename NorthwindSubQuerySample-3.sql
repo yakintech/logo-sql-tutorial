@@ -1,51 +1,1 @@
---SubQuery Sample
-select * from Products 
-where CategoryID = (select CategoryID from Categories where CategoryName = 'Condiments')
-
-
--- CategoryName Condiments olan URUNLER bana ver
-select * from Products as p
-inner join Categories as c
-on p.CategoryID = c.CategoryID
-where c.CategoryName = 'Condiments'
-
---urunlerin ortalama fiyatindan daha yuksek urunleri bana ver. Ornegin benim urunlerimin ortalama fiyati 150 TL ise 150 den buyuk urunleri bana ver
-
-select * from Products as pr
-where pr.UnitPrice > (select AVG(p.UnitPrice) from Products as p)
-order by pr.UnitPrice
-
-
---Her kategorideki en PAHALI urunu bana ver
---select
---pr.CategoryID,
---pr.ProductName,
---pr.UnitPrice
---from 
---Products as pr 
---where(pr.CategoryID,UnitPrice) IN
---(select
---p.CategoryID,
---MAX(p.UnitPrice)
---from Products as p 
---group by p.CategoryID)
-
-
---Hangi musteri toplam kac adet siparis vermis
-select 
-o.CustomerID,
-COUNT(o.CustomerID)
-from Orders as o
-group by o.CustomerID
-
-select
-c.CustomerID,
-(select COUNT(*) from Orders as o where c.CustomerID = o.CustomerID)
-from Customers as c
-
-
-
-
-
-
-
+﻿--1997 aylık ciro raporlarıcreate view vw_97_aylik_satis_toplamlari asselect MONTH(o.OrderDate) as Ay,SUM((od.Quantity*od.UnitPrice)) as Sipariş_Toplamı from Orders as oinner join [Order Details] as odon o.OrderID=od.OrderIDwhere YEAR(o.OrderDate)=1997group BY MONTH(o.OrderDate)select * from vw_97_aylik_satis_toplamlari order by Ayselect * from Suppliers as s where s.Region is not null -- urun fiyati 18, 40, 50 degilseselect * from Products where UnitPrice not in (18.00,40,50)-- 'Nancy' isimli calisanimizin aldigi siparisler ve tutarlarini gosteren viewcreate view vw_nancy_sales_repots asselecto.OrderID,SUM(od.Quantity * od.UnitPrice) TotalfromOrders as oinner join Employees as empon o.EmployeeID = emp.EmployeeIDinner join [Order Details] as odon od.OrderID = o.OrderIDwhere emp.FirstName = 'Nancy'group by o.OrderIDselect * from vw_nancy_sales_repotsCREATE PROCEDURE sp_sales_reports@name nvarchar(MAX)asselecto.OrderID,SUM(od.Quantity * od.UnitPrice) TotalfromOrders as oinner join Employees as empon o.EmployeeID = emp.EmployeeIDinner join [Order Details] as odon od.OrderID = o.OrderIDwhere emp.FirstName = @namegroup by o.OrderIDexec sp_sales_reports 'Laura'select * from Employees--N ile ondalik olarak formatliyorumselectp.ProductName,p.UnitsInStock,FORMAT(p.UnitPrice, 'N2','en_US') Pricefrom Products as p--Para Birimi Formatiselectp.ProductName,p.UnitsInStock,FORMAT(p.UnitPrice, 'C','tr_TR') Pricefrom Products as p--Yuzde Formatselect FORMAT(0.8256, 'P2','tr_TR')select FORMAT(o.OrderDate, 'dd MMMM yyyy dddd HH','tr_TR') OrderDate,FORMAT(o.RequiredDate, 'dd MMMM yyyy dddd','tr_TR') RequiredDate,FORMAT(o.ShippedDate, 'dd MMMM yyyy dddd','tr_TR') ShippedDatefrom Orders as o 

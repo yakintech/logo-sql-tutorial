@@ -1,0 +1,84 @@
+--Senaryomuz; kullanıcıların uygulama aracılığı ile sisteme üye girişi yaparak, teknik servise bıraktıkları ürünün durumunu sorgulayabilecekleri bir web uygulamasının veritabanı sistemini programlamanızdır. Veritabanının ihtiyaçları aşağıda belirtilmiştir. 
+
+
+--Her üye aşağıdaki bilgilere sahiptir 
+
+--Ad 
+
+--Soyad 
+
+--E-posta adresi 
+
+--Üyelik şifresi 
+
+--Sisteme giriş tarihi 
+
+--İrtibat telefonu 
+
+--İrtibat adresi 
+
+--İl 
+
+--İlçe 
+
+ 
+ 
+
+--Teknik servise bırakılan her ürün, aşağıdaki bilgileri içerir: 
+
+--Teslim alındığı tarihi, 
+
+--Ürün arızası ile ilgili kullanıcı beyanı, 
+
+--Ürün arızası ile ilgili teknik servis bilgileri, 
+
+--Arıza kategorisi, 
+
+--Teknik servis ücreti, 
+
+--Teslim edileceği tarih 
+
+--Arıza ile ilgilenecek teknik servis personeli bilgisi 
+
+--Ürünün teknik servisteki aşaması 
+
+ 
+
+--Veritabanı modellemesini yapabilmek açısından aşağıdaki tespitler size yardımcı olacaktır. 
+
+--Her ürünün yalnızca bir arıza kategorisi vardır. Fakat bir kategori altında birden fazla ürün olabilir. 
+
+--Bir üye, birden fazla ürünü teknik servise bırakmış olabilir. 
+
+--SINAVDA YAPILMASI İSTENENLER; 
+
+--1-) Tablo oluşturma ve içlerine örnek veri girişi yapılmalı,  
+
+--2-) Tablolama için Normalizasyon uygulanmalı, 
+
+--3-) Tablo yapısı ve tablolar arası ilişkilendirmelerinizi tamamladıktan sonra, iki tablo için 
+
+--aşağıdaki stored procedure’leri yazınız: 
+
+--Ekleme (INSERT) 
+
+--Güncelleme (UPDATE) 
+
+--Silme (DELETE) 
+
+--Tablonun primary key sütunu olan ID sine göre sorgu yapabilen ve veri getiren. 
+ 
+
+--4-) Yukarıdaki işlemler dışında, aşağıdaki işlemleri de gerçekleştiren stored procedureleri ve/veya view ları yazınız ; 
+
+--ID’si girilen ürün, hangi aşamada? 
+
+--ID’si girilen ürün hangi üye tarafından bırakılmış? 
+
+--ID’si girilen üye hangi ürün/ürünleri, hangi tarihte bırakmış ve ürünün sorgu anında teknik servisin hangi aşamasında, 
+
+--Hangi arıza kategorisinde ürünlerden kaçar adet servise geldiği günlük, aylık, yıllık olarak sorgulanabilmeli, 
+
+--Günlük tahsilat ve ciro raporu oluşturan sorgu, 
+
+--Teknik servis personeli, kişi bazlı, aylık performans raporu hazırlayan sorgu 
