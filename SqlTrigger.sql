@@ -16,14 +16,51 @@ BEGIN
 END
 
 
+-- delete Customers where CustomerID = 'NEW01'
+
+-- bu tablo product stocklari degistiginde o degisimin logunu tutacak
+alter table ProductStockLog
+
+--Urun guncellendiginde stocklog tablosuna bir log atmak istiyorum
+create trigger trg_afterUpdateProductStock
+on Products
+after update
+as
+begin
+IF UPDATE(UnitsInStock)
+	begin
+	insert into ProductStockLog(ProductId,AddDate,OldStock,NewStock)
+	select
+	i.ProductID,
+	GETDATE(),
+	d.UnitsInStock,
+	i.UnitsInStock
+	from inserted i
+	inner join deleted d on i.ProductID = d.ProductID
+	print 'Product Stock log tablosuna log eklendi!'
+	end
+end
 
 
-delete Customers where CustomerID = 'NEW01'
+use Northwind
+select * from ProductStockLog
+
+--delete,insert
+
+select * from Products
+update Products set UnitsInStock = 5 where ProductID = 1
 
 
-select * from Customers
+--Yeni bir tedarikci eklendiginde eklenen tedarikcinin ID sini print eden trigget
+alter trigger trg_afterInsertSupplier
+on Suppliers
+after insert
+as
+begin
+	declare @supplierId int
+	set @supplierId = (select i.SupplierID from inserted i)
+	print CAST(@supplierId AS VARCHAR)  + ' id numarali bir tedarikci eklendi'
+end
 
-select * from Orders where CustomerID = 'ALFKI' 
-
-delete Customers where CustomerID = 'ALFKI'
-
+insert into Suppliers(CompanyName,ContactName)
+values('Apple-2','Steve-2')
